@@ -1,5 +1,11 @@
 # HomelabRC (Concept)
 
+<p aligm="center">
+    <a href="https://wesleyem.github.io/homelabrc" title="Docs">
+        <img title="Docs" src="https://img.shields.io/github/actions/workflow/status/wesleyem/homelabrc/ci.yaml?style=flat-square"/>
+    </a>
+</p>
+
 **HomelabRC** is an idea for a self-hosted dashboard designed to help users manage and monitor their homelab services. Inspired by platforms like gethomepage.dev, the goal is to create a customizable interface where users can display, interact with, and control their self-hosted applications and resources.
 
 ## Project Vision
