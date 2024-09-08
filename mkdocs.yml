@@ -18,10 +18,6 @@ extra:
       link: https://github.com/wesleyem/homelabrc
 
 plugins:
-  - group:
-      enabled: true
-      plugins:
-        - typeset
   - tags
   - search:
       pipeline:

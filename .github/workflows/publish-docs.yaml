@@ -44,7 +44,7 @@ jobs:
       - run: pip install mike
       - run: pip install mkdocs-material mkdocs-redirects "mkdocs-material[imaging]"
       - name: Test Docs Build
-        run: MKINSIDERS=false mkdocs build
+        run: mkdocs build
   deploy:
     name: Deploy Docs
     runs-on: ubuntu-latest
