@@ -1,4 +1,30 @@
 site_name: HomelabRC
+
+# Project information
 site_url: https://wesleyem.github.io/homelabrc
+
+# Repository
+repo_name: wesleyem/homelabrc
+repo_url: https://github.com/wesleyem/homelabrc
+edit_uri: https://github.com/wesleyem/homelabrc/tree/main/docs/
+
 theme:
   name: material
+extra:
+  version:
+    provider: mike
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/wesleyem/homelabrc
+
+plugins:
+  - group:
+      enabled: true
+      plugins:
+        - typeset
+  - tags
+  - search:
+      pipeline:
+        - stemmer
+        - stopWordFilter
+        - trimmer
