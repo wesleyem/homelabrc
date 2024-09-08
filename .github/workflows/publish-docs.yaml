@@ -40,7 +40,6 @@ jobs:
           path: .cache
           restore-keys: |
             mkdocs-material-
-      - run: sudo apt-get install pngquant
       - run: pip install mike
       - run: pip install mkdocs-material mkdocs-redirects "mkdocs-material[imaging]"
       - name: Test Docs Build
@@ -61,7 +60,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: 3.x
-      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
+      - run: echo "cache_id=${{github.sha}}" >> $GITHUB_ENV
       - uses: actions/cache@v4
         with:
           key: mkdocs-material-${{ env.cache_id }}
