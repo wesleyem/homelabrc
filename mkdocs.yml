@@ -8,6 +8,12 @@ repo_name: wesleyem/homelabrc
 repo_url: https://github.com/wesleyem/homelabrc
 edit_uri: https://github.com/wesleyem/homelabrc/tree/main/docs/
 
+nav:
+  - "Home":
+    - index.md
+  - "Installation":
+    - installation/index.md
+
 theme:
   name: material
   palette:
@@ -34,12 +40,36 @@ theme:
     code: Fira Code
   features:
     - navigation.footer
+    - content.code.copy
 extra:
   version:
     provider: mike
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/wesleyem/homelabrc
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.details
+  - attr_list
+  - md_in_html
+  - admonition
 
 plugins:
   - tags
