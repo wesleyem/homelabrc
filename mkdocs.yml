@@ -1,0 +1,4 @@
+site_name: HomelabRC
+site_url: https://wesleyem.github.io/homelabrc
+theme:
+  name: material
