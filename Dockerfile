@@ -24,16 +24,8 @@ RUN pnpm run build
 FROM nginx:alpine
 
 # remove nginx landing page
-RUN rm /usr/share/nginx/html/index.html
-
-# # Create a non-root user for running the app
-# RUN adduser -D -g '' angularuser
-
-# # Create necessary Nginx cache directories and give proper permissions
-# RUN mkdir -p /var/cache/nginx/client_temp && \
-#   chown -R angularuser:angularuser /var/cache/nginx
-
-# USER angularuser
+RUN rm /usr/share/nginx/html/index.html \
+  && mkdir config
 
 # Copy the built Angular app from the build stage to the Nginx folder
 COPY --from=build /app/dist/homelabrc /usr/share/nginx/html
@@ -42,11 +34,12 @@ COPY --from=build /app/dist/homelabrc /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expose the port for the web app
-EXPOSE 3333
+ENV PORT=3333
+EXPOSE ${PORT}
 
 # Add a healthcheck to monitor the running app
 HEALTHCHECK --interval=30s --timeout=10s \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:3333/ || exit 1
+  CMD wget --no-verbose --tries=1 --spider http://localhost:${PORT}/ || exit 1
 
 # Start Nginx to serve the app
 CMD ["nginx", "-g", "daemon off;"]
