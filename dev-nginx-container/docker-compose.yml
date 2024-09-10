@@ -1,0 +1,9 @@
+name: dev-server-container
+services:
+  nginx:
+    container_name: nginx-dev-container
+    ports:
+      - 8888:80
+    volumes:
+      - ./config:/usr/share/nginx/html/config
+    image: nginx:latest
