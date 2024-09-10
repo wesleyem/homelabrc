@@ -8,7 +8,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:homelabrc": "node dist/homelabrc/server/server.mjs",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "beup": "docker compose -f ./dev-nginx-container/docker-compose.yml up -d",
+    "bedown": "docker compose -f ./dev-nginx-container/docker-compose.yml down"
   },
   "private": true,
   "dependencies": {

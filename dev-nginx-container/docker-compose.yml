@@ -6,4 +6,4 @@ services:
       - 8888:80
     volumes:
       - ./config:/usr/share/nginx/html/config
-    image: nginx:latest
+    image: nginx:alpine
