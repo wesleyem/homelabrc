@@ -1,0 +1,10 @@
+{
+  "/config/*.yaml": {
+    "target": "http://localhost:8888",
+    "secure": false
+  },
+  "/config/*.yml": {
+    "target": "http://localhost:8888",
+    "secure": false
+  }
+}

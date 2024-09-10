@@ -79,7 +79,9 @@
               "buildTarget": "homelabrc:build:production"
             },
             "development": {
-              "buildTarget": "homelabrc:build:development"
+              "buildTarget": "homelabrc:build:development",
+              "proxyConfig": "src/proxy.conf.json",
+              "open": true
             }
           },
           "defaultConfiguration": "development"
