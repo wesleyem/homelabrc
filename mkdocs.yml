@@ -13,6 +13,9 @@ nav:
     - index.md
   - "Installation":
     - installation/index.md
+  - "Configuration":
+    - configuration/index.md
+    - configuration/settings.md
 
 theme:
   name: material

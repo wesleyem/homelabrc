@@ -14,7 +14,7 @@ services:
     ports:
       - 3333:3333
     volumes:
-      - config_data:/app/config
+      - /path/to/your/config:/app/config
       - /var/run/docker.sock:/var/run/docker.sock # (optional) For docker integrations
 
 volumes:
@@ -24,5 +24,5 @@ volumes:
 ### With Docker Run
 
 ```bash
-docker run -p 3333:3333 -v config_data:/app/config -v /var/run/docker.sock:/var/run/docker.sock ghcr.io/wesleyem/homelabrc:latest
+docker run -p 3333:3333 -v /path/to/your/config:/app/config -v /var/run/docker.sock:/var/run/docker.sock ghcr.io/wesleyem/homelabrc:latest
 ```
