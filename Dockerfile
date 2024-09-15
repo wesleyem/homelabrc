@@ -12,7 +12,7 @@ RUN apk add --no-cache libc6-compat && npm install -g pnpm
 # Cache pnpm store to speed up dependencies installation
 COPY package.json pnpm-lock.yaml ./
 RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store pnpm fetch
-RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store pnpm install --offline
+RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store pnpm install
 
 # Copy the rest of the source code
 COPY . .
