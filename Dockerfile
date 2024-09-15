@@ -20,26 +20,18 @@ COPY . .
 # Build the Angular app
 RUN pnpm run build
 
-# Stage 2: Serve the app using Nginx
-FROM nginx:alpine
+# Stage 2: Set up Node.js server
+FROM node:18-alpine AS runtime
 
-# remove nginx landing page
-RUN rm /usr/share/nginx/html/index.html \
-  && mkdir config
+# Set the working directory
+WORKDIR /app
 
-# Copy the built Angular app from the build stage to the Nginx folder
-COPY --from=build /app/dist/homelabrc /usr/share/nginx/html
-
-# Copy the custom Nginx configuration file
-COPY nginx.conf /etc/nginx/nginx.conf
+# Copy the built files from the build stage
+COPY --from=build /app/dist /app/dist
 
 # Expose the port for the web app
 ENV PORT=3333
 EXPOSE ${PORT}
 
-# Add a healthcheck to monitor the running app
-HEALTHCHECK --interval=30s --timeout=10s \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:${PORT}/ || exit 1
-
-# Start Nginx to serve the app
-CMD ["nginx", "-g", "daemon off;"]
+# Start the Node.js server
+CMD ["node", "/app/dist/homelabrc/server/server.mjs"]

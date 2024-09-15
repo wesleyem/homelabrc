@@ -80,7 +80,6 @@
             },
             "development": {
               "buildTarget": "homelabrc:build:development",
-              "proxyConfig": "src/proxy.conf.json",
               "open": true
             }
           },

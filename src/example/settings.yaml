@@ -1,0 +1,15 @@
+title: HomelabRC
+foo:
+  - bar: 123
+  - baz:
+      inner: 'nested'
+  - arr: [1, 2, 3]
+  - extraProp: 'ignore this'
+  - anotherExtraProp:
+      deep: 'ignored'
+layout:
+  one:
+    two:
+      three:
+        four:
+      threeOne: "d"
