@@ -1,16 +1,16 @@
 {
   "name": "homelabrc",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "docker build -t homelabrc . && docker run --rm -p 3333:3333 -v ./src/example:/config homelabrc:latest",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:homelabrc": "node dist/homelabrc/server/server.mjs",
     "lint": "ng lint",
-    "beup": "docker compose -f ./dev-nginx-container/docker-compose.yml up -d",
-    "bedown": "docker compose -f ./dev-nginx-container/docker-compose.yml down"
+    "docker:build": "docker build -t homelabrc .",
+    "docker:run": "docker run --rm -p 3333:3333 -v ./src/example:/config homelabrc:latest"
   },
   "private": true,
   "dependencies": {
