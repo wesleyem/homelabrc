@@ -3,13 +3,13 @@
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
-    "start": "docker build -t homelabrc . && docker run --rm -p 3333:3333 -v ./src/example:/config homelabrc:latest",
+    "start": "pnpm run docker:build && pnpm run docker:run",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:homelabrc": "node dist/homelabrc/server/server.mjs",
     "lint": "ng lint",
-    "docker:build": "docker build -t homelabrc .",
+    "docker:build": "docker build --no-cache -t homelabrc .",
     "docker:run": "docker run --rm -p 3333:3333 -v ./src/example:/config homelabrc:latest"
   },
   "private": true,

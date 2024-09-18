@@ -4,8 +4,10 @@ import express from 'express';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import bootstrap from './src/main.server';
-import { LoggerService } from './src/app/util/logger.service';
-import { ConfigService } from './src/app/util/config.service';
+import { LoggerService } from './src/app/util/logger/logger.service';
+import { ConfigService } from './src/app/util/config/config.service';
+import { API_ENDPOINTS, LOGS } from './src/app/constants/constants';
+import { LogEntry } from './src/app/util/communicator';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -15,8 +17,10 @@ export function app(): express.Express {
   const indexHtml = join(serverDistFolder, 'index.server.html');
 
   const commonEngine = new CommonEngine();
-  const logger = new LoggerService();
   const config = new ConfigService('/config').init();
+  const settings = config.getSettings();
+  const logPath = settings["logPath"] || LOGS.DEFAULT_PATH;
+  const logger = new LoggerService(logPath);
 
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
@@ -25,17 +29,16 @@ export function app(): express.Express {
 
   server.get('/config/settings', (req, res) => {
     try {
-      res.send({data: 'Ok', settings: config.getSettings()});
+      res.send({data: 'Ok', settings: settings});
     } catch (error) {
       logger.error("Error in /config/service/", [error]);
     }
   });
 
-  server.post('/api/log', (req, res) => {
+  server.post(API_ENDPOINTS.LOG, (req, res) => {
     try {
-      const level: string = req?.body?.level || 'info';
-      const message: string = req?.body?.message || 'no message provided';
-      logger.log(level, message);
+      const { level, message, error }: LogEntry = req.body;
+      logger.log({level, message, error});
       res.sendStatus(202);
     } catch (error) {
       logger.error("Error logging message", [error]);

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { MessengerService } from './util/messenger/messenger.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,9 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   title = 'homelabrc';
 
-  constructor() {
-    console.log("AppComponent constructed")
+  messenger: MessengerService;
+
+  constructor(private _messenger: MessengerService) {
+    this.messenger = _messenger;
   }
 }

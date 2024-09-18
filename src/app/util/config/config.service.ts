@@ -10,9 +10,11 @@ interface Config {
 
 export class ConfigService {
   private readonly yamlFiles = ['settings.yaml', 'settings.yml']
-  private settings: Config | null  = null;
+  private settings!: Config;
 
-  constructor(private readonly configDir = '/config') {}
+  constructor(private readonly configDir = '/config') {
+    this.init();
+  }
 
   public init(): ConfigService {
     this.settings = this.loadSettings();
@@ -22,17 +24,14 @@ export class ConfigService {
   /**
    * Returns the configuration settings.
    */
-   public getSettings(): Config | null {
-    if (!this.settings) {
-      this.init();
-    }
+   public getSettings(): Config {
     return this.settings;
    }
 
   /**
    * Loads the configuration settings and stores them for access.
    */
-  private loadSettings(): Config | null {
+  private loadSettings(): Config {
     for (const yamlFile of this.yamlFiles) {
       const settingsYaml = join(this.configDir, yamlFile);
       if (existsSync(settingsYaml)) {
