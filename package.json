@@ -10,7 +10,7 @@
     "serve:ssr:homelabrc": "node dist/homelabrc/server/server.mjs",
     "lint": "ng lint",
     "docker:build": "docker build --no-cache -t homelabrc .",
-    "docker:run": "docker run --rm -p 3333:3333 -v ./src/example:/config homelabrc:latest"
+    "docker:run": "docker run --rm -p 3333:3333 -v ./public/config:/config homelabrc:latest"
   },
   "private": true,
   "dependencies": {
