@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:latest
 
 # Stage 1: Build the Angular app
-FROM node:18-alpine AS build
+FROM node:22-alpine AS base
 
 # Set the working directory
 WORKDIR /app
@@ -9,29 +9,28 @@ WORKDIR /app
 # Install pnpm globally and necessary build dependencies
 RUN apk add --no-cache libc6-compat && npm install -g pnpm
 
-# Cache pnpm store to speed up dependencies installation
-COPY package.json pnpm-lock.yaml ./
-RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store pnpm fetch
-RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store pnpm install
+COPY pnpm-lock.yaml ./
+RUN pnpm fetch
 
-# Copy the rest of the source code
-COPY . .
+FROM base AS build
 
-# Build the Angular app
+COPY . /app
+
+RUN pnpm install -r --offline
 RUN pnpm run build
 
-# Stage 2: Set up Node.js server
-FROM node:18-alpine AS runtime
+FROM nginx:latest
+
+RUN rm /usr/share/nginx/html/*
 
 # Set the working directory
 WORKDIR /app
 
 # Copy the built files from the build stage
-COPY --from=build /app/dist /app/dist
+COPY --from=build /app/dist/homelabrc /usr/share/nginx/html
 
-# Expose the port for the web app
-ENV PORT=3333
-EXPOSE ${PORT}
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# Start the Node.js server
-CMD ["node", "/app/dist/homelabrc/server/server.mjs"]
+EXPOSE 3333
+
+CMD ["nginx", "-g", "daemon off;"]
