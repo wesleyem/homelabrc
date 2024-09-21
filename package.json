@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
-    "start": "pnpm run docker:build && pnpm run docker:run",
+    "dev": "ng serve",
+    "docker": "pnpm run docker:build && pnpm run docker:run",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
