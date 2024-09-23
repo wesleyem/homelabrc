@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { readFileSync, existsSync } from "node:fs";
-import { join } from "node:path";
+import { readFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
 import * as YAML from 'yaml';
 
 interface Config {
@@ -9,7 +9,7 @@ interface Config {
 }
 
 export class ConfigService {
-  private readonly yamlFiles = ['settings.yaml', 'settings.yml']
+  private readonly yamlFiles = ['settings.yaml', 'settings.yml'];
   private settings!: Config;
 
   constructor(private readonly configDir = '/config') {
@@ -24,9 +24,9 @@ export class ConfigService {
   /**
    * Returns the configuration settings.
    */
-   public getSettings(): Config {
+  public getSettings(): Config {
     return this.settings;
-   }
+  }
 
   /**
    * Loads the configuration settings and stores them for access.
@@ -38,9 +38,10 @@ export class ConfigService {
         return this.parseConfig(settingsYaml);
       }
     }
-    throw new Error('No configuration file found (settings.yaml or settings.yml)');
+    throw new Error(
+      'No configuration file found (settings.yaml or settings.yml)',
+    );
   }
-
 
   /**
    * Parses the configuration file content (YAML format).
@@ -56,7 +57,6 @@ export class ConfigService {
     }
   }
 
-
   /**
    * Converts the layout structure if present.
    */
@@ -70,5 +70,4 @@ export class ConfigService {
     }
     return config;
   }
-
 }

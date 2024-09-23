@@ -1,7 +1,14 @@
-import { mergeApplicationConfig, ApplicationConfig, APP_INITIALIZER } from '@angular/core';
+import {
+  mergeApplicationConfig,
+  ApplicationConfig,
+  APP_INITIALIZER,
+} from '@angular/core';
 import { provideServerRendering } from '@angular/platform-server';
 import { appConfig } from './app.config';
-import { ConfigurationService, loadConfiguration } from './configuration.service';
+import {
+  ConfigurationService,
+  loadConfiguration,
+} from './configuration.service';
 
 const serverConfig: ApplicationConfig = {
   providers: [
@@ -10,9 +17,9 @@ const serverConfig: ApplicationConfig = {
       provide: APP_INITIALIZER,
       useFactory: loadConfiguration,
       deps: [ConfigurationService],
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 };
 
 export const config = mergeApplicationConfig(appConfig, serverConfig);

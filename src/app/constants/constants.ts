@@ -1,6 +1,6 @@
 export const API_ENDPOINTS = {
-  LOG: '/api/log'
-}
+  LOG: '/api/log',
+};
 export const LOGS = {
-  DEFAULT_PATH: 'logs'
-}
+  DEFAULT_PATH: 'logs',
+};

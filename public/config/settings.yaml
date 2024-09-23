@@ -2,11 +2,11 @@ title: HomelabRC
 foo:
   - bar: 123
   - baz:
-      inner: 'nested'
+      inner: "nested"
   - arr: [1, 2, 3]
-  - extraProp: 'ignore this'
+  - extraProp: "ignore this"
   - anotherExtraProp:
-      deep: 'ignored'
+      deep: "ignored"
 layout:
   one:
     two:

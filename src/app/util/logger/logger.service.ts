@@ -4,7 +4,7 @@ import { Communicator, LogEntry } from '../communicator';
 
 export class LoggerService implements Communicator {
   private logger: Logger;
-  private logFileName = "homelabrc.log";
+  private logFileName = 'homelabrc.log';
   private logPath: string;
 
   constructor(private _logPath: string) {
@@ -15,11 +15,13 @@ export class LoggerService implements Communicator {
         winston.format.timestamp(),
         winston.format.printf(({ level, message, timestamp }) => {
           return `${timestamp} [${level.toUpperCase()}]: ${message}`;
-        })
+        }),
       ),
       transports: [
         new winston.transports.Console(),
-        new winston.transports.File({ filename: `${this.logPath}/${this.logFileName}`})
+        new winston.transports.File({
+          filename: `${this.logPath}/${this.logFileName}`,
+        }),
       ],
     });
   }
