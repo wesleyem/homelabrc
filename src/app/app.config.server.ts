@@ -7,15 +7,16 @@ import { provideServerRendering } from '@angular/platform-server';
 import { appConfig } from './app.config';
 import {
   ConfigurationService,
-  loadConfiguration,
+  loadConfigFactory,
 } from './configuration.service';
 
 const serverConfig: ApplicationConfig = {
   providers: [
     provideServerRendering(),
+    ConfigurationService,
     {
       provide: APP_INITIALIZER,
-      useFactory: loadConfiguration,
+      useFactory: loadConfigFactory,
       deps: [ConfigurationService],
       multi: true,
     },

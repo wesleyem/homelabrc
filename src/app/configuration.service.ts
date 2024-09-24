@@ -1,49 +1,36 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
-import { MessengerService } from './util/messenger/messenger.service';
+import { Settings } from './models/settings';
+import { log } from 'console';
+import { firstValueFrom } from 'rxjs';
 
-export function loadConfiguration(configService: ConfigurationService) {
-  return () => configService.loadConfiguration();
-}
-
-export interface Config {
-  layout?: Record<string, any>;
-  [key: string]: any;
+export function loadConfigFactory(configService: ConfigurationService) {
+  return () => {
+    log('loadConfigFactory - started');
+    return configService.loadSettings().then(() => {
+      log('loadConfigFactory - completed');
+    });
+  };
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConfigurationService {
-  private readonly yamlFile = 'settings.yaml';
-  private _configuration: any;
+  private readonly settingsFileName = 'settings.json';
+  private _settings: Settings = {};
   private readonly configDir = 'config';
 
-  constructor(
-    private _http: HttpClient,
-    private _messengerService: MessengerService,
-  ) {}
+  constructor(private _http: HttpClient) {}
 
-  public getSettings(): Config {
-    return this._configuration;
+  public getSettings(): Settings {
+    return this._settings;
   }
 
-  public loadConfiguration() {
-    const settingsYaml = `./${this.configDir}/${this.yamlFile}`;
-    return this._http.get(settingsYaml, { responseType: 'text' }).pipe(
-      map((fileContents: string) => {
-        this._configuration = fileContents;
-        this._messengerService.log(this._configuration);
-      }),
-      catchError((error: HttpErrorResponse) => {
-        if (error.status == 404) {
-          console.error(`${this.yamlFile}: `, error.message);
-        }
-        return of(null);
-      }),
+  async loadSettings() {
+    const settingsUri = `./${this.configDir}/${this.settingsFileName}`;
+    this._settings = await firstValueFrom(
+      this._http.get<Settings>(settingsUri),
     );
   }
 }

@@ -1,3 +1,27 @@
 {
-  "asdf": "asdf"
+  "title": "My Dashboard",
+  "background": {
+    "uri": "https://example.com/background.jpg",
+    "blur": "5px",
+    "saturate": 1.2,
+    "brightness": 0.8,
+    "opacity": 0.9
+  },
+  "favicon": "https://example.com/favicon.ico",
+  "theme": "dark",
+  "color": 1,
+  "layout": [
+    {
+      "name": "Sonarr",
+      "icon": "https://example.com/weather-icon.png",
+      "href": "https://sonarr.example.com",
+      "description": "Series management",
+      "container": "sonarr-container",
+      "widget": {
+        "type": "sonarr",
+        "url": "https://sonarr.example.com/",
+        "key": "sonarrapikey"
+      }
+    }
+  ]
 }

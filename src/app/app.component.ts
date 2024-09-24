@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MessengerService } from './util/messenger/messenger.service';
+import { ConfigurationService } from './configuration.service';
+import { log } from 'console';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,14 @@ import { MessengerService } from './util/messenger/messenger.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'homelabrc';
 
-  messenger: MessengerService;
+  constructor(private configService: ConfigurationService) {}
 
-  constructor(private _messenger: MessengerService) {
-    this.messenger = _messenger;
+  ngOnInit(): void {
+    const settings = this.configService.getSettings();
+    this.title = settings.title || this.title;
+    log('Settings in app component:', settings);
   }
 }
