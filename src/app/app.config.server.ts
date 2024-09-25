@@ -13,7 +13,6 @@ import {
 const serverConfig: ApplicationConfig = {
   providers: [
     provideServerRendering(),
-    ConfigurationService,
     {
       provide: APP_INITIALIZER,
       useFactory: loadConfigFactory,

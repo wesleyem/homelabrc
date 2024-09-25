@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// import { API_ENDPOINTS } from '../../constants/constants';
 import { Communicator, LogEntry } from '../communicator';
 
 @Injectable({
@@ -27,6 +25,7 @@ export class MessengerService implements Communicator {
     this.log({ level: 'warn', message });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error(message: string, error: any[]): void {
     this.log({ level: 'error', message, error });
   }

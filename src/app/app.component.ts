@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ConfigurationService } from './configuration.service';
-import { log } from 'console';
+import { MessengerService } from './util/messenger/messenger.service';
 
 @Component({
   selector: 'app-root',
@@ -10,14 +10,14 @@ import { log } from 'console';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'homelabrc';
 
-  constructor(private configService: ConfigurationService) {}
-
-  ngOnInit(): void {
-    const settings = this.configService.getSettings();
-    this.title = settings.title || this.title;
-    log('Settings in app component:', settings);
+  constructor(
+    private configService: ConfigurationService,
+    private messengerService: MessengerService,
+  ) {
+    const settings = this.configService.settings;
+    this.title = settings.title!;
   }
 }

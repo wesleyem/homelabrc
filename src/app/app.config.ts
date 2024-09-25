@@ -8,7 +8,6 @@ import {
   withFetch,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-// import { ConfigurationService } from './configuration.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,6 +16,5 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(withFetch(), withInterceptorsFromDi()),
-    // { provide: ConfigurationService }
   ],
 };
